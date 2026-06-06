@@ -41,7 +41,6 @@ void loop() {
 #include "espnow_comm.h"
 
 constexpr uint16_t CONFIG_BAUDRATE = 9600;
-static const uint8_t RECEIVER_MAC[] = { 0xB4, 0xBF, 0xE9, 0x0B, 0x73, 0x08 };
 
 void setup() {
   // setup serial
