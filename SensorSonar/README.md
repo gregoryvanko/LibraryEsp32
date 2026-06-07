@@ -5,6 +5,11 @@ Cette librairie permet de controler un capoteur de distance sonar de type JNS-SR
 ```cpp
 #include "SensorSonar.h"
 
+constexpr uint8_t CONFIG_PIN_TRIG = 5;
+constexpr uint8_t CONFIG_PIN_ECHO = 18;
+constexpr uint16_t CONFIG_BAUDRATE = 9600;
+constexpr uint32_t CONFIG_MESURE_INTERVAL = 5000;
+
 SensorSonar SensorSonar1(CONFIG_PIN_TRIG, CONFIG_PIN_ECHO);
 
 // Deniere mesure (ms)
