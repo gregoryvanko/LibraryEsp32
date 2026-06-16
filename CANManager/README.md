@@ -52,9 +52,9 @@ void loop() {
     lastMesure = now;
 
     // Send Can
-    can.sendFloat(CONFIG_CAN_ID_waterTemp, waterTemp);
+    can.sendFloat(CONFIG_CAN_ID_waterTemp, 25.54);
     delay(10);
-    can.sendBool(CONFIG_CAN_ID_waterPresent, waterPresent);
+    can.sendBool(CONFIG_CAN_ID_waterPresent, true);
     delay(10);
   }
 }
