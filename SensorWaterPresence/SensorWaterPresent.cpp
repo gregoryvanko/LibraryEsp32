@@ -9,6 +9,7 @@ void SensorWaterPresent::begin(){
   } else {
     pinMode(_pin, INPUT);
   }
+  Serial.println("[WaterPresent] Capteur initialisé.");
 }
 
 bool SensorWaterPresent::read(){
