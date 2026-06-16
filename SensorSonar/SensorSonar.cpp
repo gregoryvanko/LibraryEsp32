@@ -21,6 +21,7 @@ void SensorSonar::begin()
     pinMode(_trigPin, OUTPUT);
     pinMode(_echoPin, INPUT);
     digitalWrite(_trigPin, LOW);
+    Serial.println("[Sonar] Capteur initialisé.");
     delay(100); // stabilisation capteur
 }
 
