@@ -23,6 +23,7 @@ void SensorTDS::begin()
     // l'atténuation est correcte pour couvrir 0–3.3 V.
     analogSetPinAttenuation(_pin, ADC_11db);   // plage 0–3.3 V
     analogReadResolution(12);                  // 12 bits → 0–4095
+    Serial.println("[TDS] Capteur initialisé.");
 }
 
 // ─────────────────────────────────────────────
