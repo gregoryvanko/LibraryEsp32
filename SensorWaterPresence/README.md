@@ -1,4 +1,4 @@
-# SensorSonar
+# Water Presence
 Cette librairie permet de mesurer la présence d'eau via un capteur de CQRobot
 
 ## Exemple de fichier main
