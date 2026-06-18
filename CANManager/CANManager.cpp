@@ -241,40 +241,34 @@ int32_t CANManager::decodeInt32(const CANMessage &message) {
 bool CANManager::setFilterRange(uint32_t idStart, uint32_t idEnd, bool useExtendedId) {
     if (idStart > idEnd) {
         Serial.printf("[CANManager] Erreur set filter range : Plage invalide\n");
-        return false;  // Plage invalide
+        return false;
     }
- 
-    // Calcule le code d'acceptation et le masque pour couvrir la plage
-    // Trouver les bits qui varient entre idStart et idEnd
+
     uint32_t diff = idStart ^ idEnd;
-    
-    // Trouver le bit de poids faible qui varie
+
+    // Trouver le bit de poids fort qui varie
     uint32_t mask = 0xFFFFFFFF;
-    for (int i = 0; i < 32; i++) {
-        if (diff & (1 << i)) {
-            // Tous les bits à partir de ce bit sont variables
-            mask = ~((1 << (i + 1)) - 1);
+    for (int i = 31; i >= 0; i--) {
+        if (diff & (1u << i)) {
+            // Tous les bits à partir de ce bit (inclus) sont variables
+            mask = ~((1u << (i + 1)) - 1u);
             break;
         }
     }
- 
-    // Le code d'acceptation peut être soit idStart soit idEnd (les bits constants sont les mêmes)
+
     uint32_t acceptanceCode = idStart & mask;
-    
-    // Décaler pour le format du registre TWAI (11-bit: décalage de 21, 29-bit: décalage de 0)
+
     if (!useExtendedId) {
         acceptanceCode <<= 21;
         mask <<= 21;
     }
- 
-    // Inverser le masque (1 = ignorer le bit, 0 = comparer)
+
+    // Inverser le masque (1 = ignorer, 0 = comparer)
     mask = ~mask;
- 
-    // Appliquer au filtre global
+
     filterConfig.acceptance_code = acceptanceCode;
     filterConfig.acceptance_mask = mask;
     filterConfig.single_filter = true;
- 
     return true;
 }
 
