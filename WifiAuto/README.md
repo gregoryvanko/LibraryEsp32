@@ -78,7 +78,7 @@ lib_deps = knolleary/PubSubClient@^2.8
    effacée automatiquement : en cas de coupure du broker, l'ESP32 continue
    de retenter indéfiniment.
 6. **Publication / souscription :** `mqttPublish()` envoie un message
-   `String` sur un topic ; `mqttSubscribe()` s'abonne à un topic (avec
+   (`String` ou `const char*`) sur un topic (`String` ou `const char*`) ; `mqttSubscribe()` s'abonne à un topic (avec
    wildcards `+`/`#`) et les messages reçus sont transmis au callback réglé
    par `setMqttMessageCallback()`, avec le topic et le payload.
 7. **Statut de connexion régulier :** si un topic est fourni en 3ᵉ
@@ -321,6 +321,10 @@ void loop() {
 // qui ne publie qu'en QoS 0, conservé pour compatibilité d'API)
 wifi.mqttPublish("esp32/salon/temperature", String(21.5));
 wifi.mqttPublish("esp32/salon/etat", "ON", true);
+
+// Le topic peut aussi être un String (ex. topic construit dynamiquement)
+String topic = String("esp32/salon/pin") + String(3);
+wifi.mqttPublish(topic, String(1));
 
 // Souscrire / se désabonner (wildcards + et # supportés)
 wifi.mqttSubscribe("esp32/salon/cmd");

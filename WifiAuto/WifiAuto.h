@@ -131,10 +131,12 @@ public:
 
   // --- MQTT ---
 
-  // Publie un message (String ou const char*) sur un topic.
+  // Publie un message (String ou const char*) sur un topic (String ou const char*).
   // qos est conservé pour compatibilité d'API : PubSubClient ne publie qu'en QoS 0.
   bool mqttPublish(const char* topic, const String& payload, bool retain = false, uint8_t qos = 0);
   bool mqttPublish(const char* topic, const char* payload, bool retain = false, uint8_t qos = 0);
+  bool mqttPublish(const String& topic, const String& payload, bool retain = false, uint8_t qos = 0);
+  bool mqttPublish(const String& topic, const char* payload, bool retain = false, uint8_t qos = 0);
   // Souscrit / se désabonne d'un topic (wildcards + et # supportés)
   bool mqttSubscribe(const char* topic, uint8_t qos = 0);
   bool mqttUnsubscribe(const char* topic);

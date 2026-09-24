@@ -693,6 +693,14 @@ bool WifiAuto::mqttPublish(const char* topic, const char* payload, bool retain, 
   return ok;
 }
 
+bool WifiAuto::mqttPublish(const String& topic, const String& payload, bool retain, uint8_t qos) {
+  return mqttPublish(topic.c_str(), payload.c_str(), retain, qos);
+}
+
+bool WifiAuto::mqttPublish(const String& topic, const char* payload, bool retain, uint8_t qos) {
+  return mqttPublish(topic.c_str(), payload, retain, qos);
+}
+
 bool WifiAuto::mqttSubscribe(const char* topic, uint8_t qos) {
   // Pas de log ici : appeler subscribe() alors que le broker n'est pas encore connecté est un
   // cas normal, pas une anomalie à tracer
